@@ -14,6 +14,6 @@ public class CombinedEventLogger implements EventLogger {
 
     @Override
     public void logEvent(Event event) {
-
+        loggers.forEach(logger -> logger.logEvent(event));
     }
 }

@@ -4,10 +4,10 @@ public class Client {
 
     private String id;
     private String fullName;
-    private String greetings;
+    private String greeting;
 
-    public void setGreetings(String greetings) {
-        this.greetings = greetings;
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
     }
 
     public Client(String id, String fullName) {

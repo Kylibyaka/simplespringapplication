@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-               http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+               http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+               http://www.springframework.org/schema/util
+               http://www.springframework.org/schema/util/spring-util-4.3.xsd">
     <bean id="eventLogger" class="com.epam.loggers.ConsoleEventLogger"/>
     <bean id="fileEventLogger" class="com.epam.loggers.FileEventLogger" init-method="init">
         <constructor-arg value="C:\Users\Zstudent\1.txt"/>
@@ -10,7 +13,7 @@
     <bean id="cacheFileEventLogger" class="com.epam.loggers.CacheFileEventLogger" parent="fileEventLogger" destroy-method="destroy">
         <constructor-arg value="5"/>
     </bean>
-
+    <bean id="consoleEventLogger" class="com.epam.loggers.ConsoleEventLogger"/>
     <bean id="combinedEventLogger" class="com.epam.loggers.CombinedEventLogger">
         <constructor-arg>
             <list>
@@ -19,4 +22,8 @@
             </list>
         </constructor-arg>
     </bean>
+    <util:map id="loggerMap">
+        <entry key="INFO" value-ref="consoleEventLogger"/>
+        <entry key="ERROR" value-ref="combinedEventLogger"/>
+    </util:map>
 </beans>

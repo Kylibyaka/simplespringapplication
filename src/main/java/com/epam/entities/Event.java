@@ -5,7 +5,11 @@ import java.util.Date;
 import java.util.Random;
 
 public class Event {
-    private int id = new Random().nextInt(50);
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     private String msg;
     private Date date;
     private DateFormat df;
