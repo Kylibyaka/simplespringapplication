@@ -20,7 +20,7 @@
         </plugins>
     </build>
     <properties>
-            <spring.version>4.3.14.RELEASE</spring.version>
+        <spring.version>4.3.14.RELEASE</spring.version>
         <aspectj.version>1.9.4</aspectj.version>
     </properties>
 
@@ -60,6 +60,17 @@
             <artifactId>aspectjrt</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
+        </dependency>
+
 
     </dependencies>
 

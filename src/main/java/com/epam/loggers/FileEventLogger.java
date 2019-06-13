@@ -3,13 +3,15 @@ package com.epam.loggers;
 import com.epam.entities.Event;
 import org.apache.commons.io.FileUtils;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileEventLogger implements EventLogger {
 
     private String filename;
-    private File file;
+    private Path path;
 
     public FileEventLogger(String filename) {
         this.filename = filename;
@@ -20,17 +22,21 @@ public class FileEventLogger implements EventLogger {
     }
 
     public void logEvent(Event event) {
-        file = new File(filename);
+        path = Paths.get(filename);
         try {
-            FileUtils.writeStringToFile(file, event.toString(), true);
+            FileUtils.writeStringToFile(path.toFile(), event.toString() + "\n", true);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void init() throws IOException {
-        this.file = new File(filename);
-        if (!file.canWrite()) {
+        this.path = Paths.get(filename);
+        Files.createDirectories(path.getParent());
+        if (!Files.exists(path)) {
+            Files.createFile(path);
+        }
+        if (!Files.isWritable(path)) {
             throw new IOException();
         }
     }
